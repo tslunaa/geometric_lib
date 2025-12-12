@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - master
-      - '**'   # можно оставить, чтобы запускалось на любой ветке
+      - '**' 
   pull_request:
 
 jobs:
@@ -18,24 +18,20 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      # 1. Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 3. Устанавливаем зависимости (если есть requirements.txt)
       - name: Install dependencies
         if: hashFiles('requirements.txt') != ''
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      # 4. Запускаем юнит-тесты из предыдущей лабы
+ы
       - name: Run unit tests
         run: |
           python -m unittest discover -v
